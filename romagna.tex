@@ -1,8 +1,10 @@
-\documentclass[12pt, a4paper, oneside, romanian]{teza-upb}
+\documentclass[12pt, a4paper, twoside, romanian]{teza-upb}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 \usepackage{babel}
 \usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
 \usepackage{url}
 \usepackage[
   bookmarksnumbered,
@@ -14,6 +16,7 @@
 
 
 \singlespacing
+\newtheorem{defn}{Definiție}
 
 \begin{document}
 
@@ -42,32 +45,71 @@
   Sp  = Spânul 
   
 }
-%\preface{}
-\afterpreface 
-\chapter{Introducere}
-Hello\cite{punguta1876}.
+\preface{
+  
 As defined in \cite{wiki:xxx}
 
 
 Big-data și machine learning sunt domenii foarte căutate în zilele noastre, devenind chiar “buzzwords”. Majoritatea se bazează pe algoritmi simplii, de adunare și prelucrare automată a datelor.
-Analiza conceptuală formală oferă o alternativă…
+Analiza conceptuală formală oferă o alternativă...
 
 \begin{itemize}
   \item Importanța explorării conceptelor
   \item Lacunele softului existent
   \item Intențiile aplicației
 \end{itemize}
+}
+\afterpreface 
+
 
 \chapter{Analiza conceptuală formală}
-  Analiza conceptuală formală e... blabla
-  \begin{itemize}
-    \item Scurtă istorie
-    \item Concepte de bază
-    \item Diagrame Hasse
-    \item Conexiune Galois
-    \item Latice conceptuală
-    \item Algoritmi folosiți la generarea și afișarea laticelor.
-  \end{itemize}
+  Analiza conceptuală formală este o ramură a teoriei laticelor, cu aplicabilitate extinsă asupra domeniului analizei calitative a datelor de orice fel.
+  \section{Concepte matematice de bază}
+    Întrucât scopul lucrării este de a descrie aplicația practică, ne vom limita la a descrie conceptele de care avem nevoie pentru a înțelege domeniul.
+    \subsection{Mulțimi ordonate, latice, latice complete}
+    \begin{defn}
+      O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație $R$ care îndeplinește următoarele condiții:
+      \begin{description}
+        \item [Reflexivitate] $xRx$
+        \item [Antisimetrie] $xRy, x \neq y \Rightarrow yRx$ e fals
+        \item [Tranzitivitate] $xRy, yRz \Rightarrow xRz$
+      \end{description}
+      $\forall x, y,z \in M$. Relația $R$ se numește o \emph{relație de ordine}.
+    \end{defn}
+
+    Cel mai simplu exemplu, intuitiv exemplu este mulțimea numerelor reale $ \mathbb{R}$, alături de relația $\le$. Notăm o mulțime ordonată cu relația $\le$ cu $(M, \le)$.
+
+    \begin{defn}
+      Un element $y$ al mulțimii $M$ este \emph{vecinul superior} al lui $x$ dacă $x < y$ și nu există nici un $z$ astfel încât $x < z < y$. În mod invers, $x$ este \emph{vecinul inferior} al lui $y$.
+    \end{defn}
+
+    Putem nota relația de vecinătate astfel: $x \prec y, y \succ x$.
+
+    \begin{defn}
+      Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \emph{limita inferioară} a mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \emph{limita superioară} a mulțimii $s$ este definită prin $\forall a \in N, s \ge a$.
+      Putem nota mulțimea tuturor limitelor inferioare a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \emph{minorantul} mulțimii $N$. Invers, cel mai mic element din mulțimea limitelor superioare este numit \emph{majorantul} mulțimii $N$.
+    \end{defn}
+
+    Minorantul se poate nota cu $\wedge N$ sau $\inf N$ (de la \emph{infimum}), iar majorantul cu $\vee N$ sau $\sup N$ (de la supremum).
+
+    \begin{defn}
+      O mulțime ordonată $M$ este numită o \emph{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente
+      ale mulțimii există majorant și minorant. O latice este \emph{completă} dacă pentru orice submulțime a ei există majorant și minorant.
+    \end{defn}
+
+    Orice latice completă are un element de vârf, numit \emph{elementul unitate}, și un element de bază, numit \emph{elementul zero}.
+
+    \begin{defn}
+    \end{defn}
+    \subsection{Context, concept, latice de concepte}
+    \begin{itemize}
+      \item Scurtă istorie
+      \item Concepte de bază
+      \item Diagrame Hasse
+      \item Conexiune Galois
+      \item Latice conceptuală
+      \item Algoritmi folosiți la generarea și afișarea laticelor.
+    \end{itemize}
 
   \section{Introducere}
   \section{Teorie}
