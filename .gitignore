@@ -1,0 +1,15 @@
+*.swp
+*.out
+*~
+*.thm
+*.log
+*.bbl
+*.blg
+*.aux
+*.toc
+*.lot
+*.lof
+*.dvi
+romagna.ps
+romagna.fls
+*.fdb_latexmk
