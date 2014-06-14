@@ -4,6 +4,7 @@
 \usepackage{babel}
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage{pbox}
 \usepackage{amsfonts}
 \usepackage{url}
 \usepackage[
@@ -17,6 +18,7 @@
 
 \singlespacing
 \newtheorem{defn}{Definiție}
+\newtheorem{example}{Exemplu}
 
 \begin{document}
 
@@ -63,7 +65,7 @@ Analiza conceptuală formală oferă o alternativă...
 
 
 \chapter{Analiza conceptuală formală}
-  Analiza conceptuală formală este o ramură a teoriei laticelor, cu aplicabilitate extinsă asupra domeniului analizei calitative a datelor de orice fel.
+  Analiza conceptuală formală este o metodă de sistematizare a datelor în \textbf{concepte}, definite la modul larg ca mulțimi de obiecte care împărtășesc anumite atribute sau proprietăți. Este o reintepretare a teoriei clasică a laticelor, dezvoltată în principal în anii '30, axată către partea practică. Conceptul a fost introdus în lucrarea seminală a lui Robert Wille din 1982 \cite{wille:1982}, iar termenul a fost introdus în 1984 de același autor. În ultimele decenii, domeniul a atras multe contribuții și și-a dovedit utilitatea în domenii cum ar fi analiza și vizualizarea datelor, managementul informației.
   \section{Concepte matematice de bază}
     Întrucât scopul lucrării este de a descrie aplicația practică, ne vom limita la a descrie conceptele de care avem nevoie pentru a înțelege domeniul.
     \subsection{Mulțimi ordonate, latice, latice complete}
@@ -74,37 +76,89 @@ Analiza conceptuală formală oferă o alternativă...
         \item [Antisimetrie] $xRy, x \neq y \Rightarrow yRx$ e fals
         \item [Tranzitivitate] $xRy, yRz \Rightarrow xRz$
       \end{description}
-      $\forall x, y,z \in M$. Relația $R$ se numește o \emph{relație de ordine}.
+      $\forall x, y,z \in M$. Relația $R$ se numește o \textbf{relație de ordine}.
     \end{defn}
 
     Cel mai simplu exemplu, intuitiv exemplu este mulțimea numerelor reale $ \mathbb{R}$, alături de relația $\le$. Notăm o mulțime ordonată cu relația $\le$ cu $(M, \le)$.
 
     \begin{defn}
-      Un element $y$ al mulțimii $M$ este \emph{vecinul superior} al lui $x$ dacă $x < y$ și nu există nici un $z$ astfel încât $x < z < y$. În mod invers, $x$ este \emph{vecinul inferior} al lui $y$.
+      Un element $y$ al mulțimii $M$ este \textbf{vecinul superior} al lui $x$ dacă $x < y$ și nu există nici un $z$ astfel încât $x < z < y$. În mod invers, $x$ este \textbf{vecinul inferior} al lui $y$.
     \end{defn}
 
     Putem nota relația de vecinătate astfel: $x \prec y, y \succ x$.
 
     \begin{defn}
-      Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \emph{limita inferioară} a mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \emph{limita superioară} a mulțimii $s$ este definită prin $\forall a \in N, s \ge a$.
-      Putem nota mulțimea tuturor limitelor inferioare a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \emph{minorantul} mulțimii $N$. Invers, cel mai mic element din mulțimea limitelor superioare este numit \emph{majorantul} mulțimii $N$.
+      Două elemente ale unei mulțimi ordonate sunt \textbf{comparabile} dacă $x \le y$ sau $y \le x$ (adică relația $\le$ se aplică asupra lor). Altfel sunt \textbf{incomparabile}. Un \textbf{lanț} este o submulțime în care oricare două elemente sunt comparabile. Un \textbf{antilanț} este o submulțime în care oricare două elemente sunt incomparabile.
     \end{defn}
-
-    Minorantul se poate nota cu $\wedge N$ sau $\inf N$ (de la \emph{infimum}), iar majorantul cu $\vee N$ sau $\sup N$ (de la supremum).
 
     \begin{defn}
-      O mulțime ordonată $M$ este numită o \emph{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente
-      ale mulțimii există majorant și minorant. O latice este \emph{completă} dacă pentru orice submulțime a ei există majorant și minorant.
+      Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \textbf{limita inferioară} a mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \textbf{limita superioară} a mulțimii $s$ este definită prin $\forall a \in N, s \ge a$.
+      Putem nota mulțimea tuturor limitelor inferioare a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \textbf{minorantul} mulțimii $N$. Invers, cel mai mic element din mulțimea limitelor superioare este numit \textbf{majorantul} mulțimii $N$.
     \end{defn}
 
-    Orice latice completă are un element de vârf, numit \emph{elementul unitate}, și un element de bază, numit \emph{elementul zero}.
+    Minorantul se poate nota cu $\wedge N$ sau $\inf N$ (de la \textbf{infimum}), iar majorantul cu $\vee N$ sau $\sup N$ (de la supremum).
+
+    \begin{defn}
+      O mulțime ordonată $M$ este numită o \textbf{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente
+      ale mulțimii există majorant și minorant. O latice este \textbf{completă} dacă pentru orice submulțime a ei există majorant și minorant.
+    \end{defn}
+
+    Orice latice completă are un element superior, numit \textbf{elementul unitate}, și un element inferior, numit \textbf{elementul zero}.
 
     \begin{defn}
     \end{defn}
-    \subsection{Context, concept, latice de concepte}
+
+    \subsection{Context, concept, ierarhie de concepte}
+    \begin{defn}
+      În cadrul analizei conceptuale, un \textbf{context} $K = (G, M, I)$ este format din 2 mulțimi, $G$ și $M$, și o relație binară $I$ între acestea. Mulțimea $G$ reprezintă obiecte, iar $M$ atribute.
+    \end{defn}
+
+      Literele provin din limba germană, în care conceptele au fost descrise inițial, de la Gegenstände și MerKmale, respectiv. Relația $I$ e numită \textbf{relația de incidență}, iar $gIm$ poate fi citit ca ``obiectul $g$ este descris de atributul $m$'', sau ``atributul $m$ descrie obiectul $g$''.
+
+      Preluăm următorul exemplu din \cite{Carpineto:2004:CDA:975252}, un context (foarte redus)al animalelor vertebrate.
+      \begin{example}
+        \begin{table}
+          \begin{tabular}[c]{| c | c | c | c | c | c | c | c | c | c | c |}
+            \hline
+            \multicolumn{2}{|c|}{} &
+            \parbox{1.2cm}{\centering respiră în apă\\(a)} &
+            \parbox{1.2cm}{\centering zboară \\(b)}         &
+            \parbox{1.2cm}{\centering  are cioc\\(c)}       &
+            \parbox{1.2cm}{\centering  are mâini \\(d)}      &
+            \parbox{1.2cm}{\centering  are schelet \\(e)}     &
+            \parbox{1.2cm}{\centering are aripi \\(f)}       &
+            \parbox{1.2cm}{\centering  trăieșe în apă\\(g)}  &
+            \parbox{1.2cm}{\centering naște pui vii \\ (h)}  &
+            \parbox{1.2cm}{\centering  produce lumină \\(i)} \\ \hline
+              1 & Liliac        &   & x &   &   & x & x &   & x &     \\
+              2 & Vultur        &   & x & x &   & x & x &   &   &     \\
+              3 & Maimuță       &   &   &   & x & x &   &   & x &     \\
+              4 & Pește papagal & x &   & x &   & x &   & x &   &     \\
+              5 & Pinguin       &   &   & x &   & x & x & x &   &     \\
+              6 & Rechin        & x &   &   &   & x &   & x &   &     \\
+              7 & Pește lanternă& x &   &   &   & x &   & x &   &  x  \\
+            \hline
+            \end{tabular}
+          \caption{Un context al animalelor vertebrate.}
+          \end{table}
+      \end{example}
+
+    Pentru $A \subseteq G$, definim
+    $ A' = \{m \in M | gIm, \forall g \in A\} $.
+
+    În mod asemănător, pentru $B \subseteq M$, $B' = \{g \in G | gIm, \forall m \in B \}$.
+
+    În cuvinte, $A'$ este mulțimea tuturor atributelor (din contextul la care ne raportăm) care descriu toate obiectele din $A$.
+
+    \begin{defn}
+      Un \textbf{concept} al contextului $(G, M, I)$ este definit de $A \subseteq G$, $B \subseteq M$, unde $A' = B$ și $B' = A$.
+    \end{defn}
+
+    În engleză, mulțimea $A$ (a tuturor obiecte descrise de atributele conceptului) este numită \textbf{extent}, iar $B$ (atributele care descriu toate obiectele conceptului) \textbf{intent}.
+
+    Având în vedere că $ A': G \rightarrow M$ și $B' : M \rightarrow G$, cei doi operatori pot fi combinați pentru a crea $A''$ și $G''$, care au ca domeniu mulțimea submulțimilor $G$ și $M$ respectiv.
+
     \begin{itemize}
-      \item Scurtă istorie
-      \item Concepte de bază
       \item Diagrame Hasse
       \item Conexiune Galois
       \item Latice conceptuală
@@ -120,16 +174,20 @@ Analiza conceptuală formală oferă o alternativă...
   \section{Toscanaj}
 
 \chapter{Romagna}
-  \section{Structură}
-    \subsection{CoffeeScript}
-    \subsection{Ember.js}
-    \subsection{d3.js}
-
   \section{Raționament}
 
     \subsection{Ușurință de utilizare}
 
     \subsection{Avantajele distribuirii aplicațiilor web}
+  \section{Structură}
+  \section{Tehnologii}
+    \subsection{CoffeeScript}
+    \subsection{Ember.js}
+    \subsection{d3.js}
+      \subsubsection{svg}
+    \subsection{sql.js}
+      \subsubsection{emscripten}
+
 
   \section{Dezvoltare}
 
