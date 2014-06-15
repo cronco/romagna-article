@@ -106,6 +106,13 @@ Analiza conceptuală formală oferă o alternativă...
     Orice latice completă are un element superior, numit \textbf{elementul unitate}, și un element inferior, numit \textbf{elementul zero}.
 
     \begin{defn}
+      Conform \cite{Carpineto:2004:CDA:975252} O \textbf{conexiune Galois} este compusă din două mulțimi ordonate, $M, N$ și două funcții $\gamma, \psi$ astfel ca $ \gamma: M \rightarrow N, \psi : N \rightarrow M$, dacă și numai dacă:
+    \begin{enumerate}
+      \item $m_1 \le m_2 \Rightarrow  \gamma m_1 \ge \gamma m_2$
+      \item $n_1 \le n_2 \Rightarrow \psi n_1 \ge \psi m_2$
+      \item $m \le \psi \gamma m,  n \le \gamma\psi n $
+    \end{enumerate}
+    sau, echivalent, $m \le \psi n \Leftrightarrow n \le \gamma m$
     \end{defn}
 
     \subsection{Context, concept, ierarhie de concepte}
@@ -140,6 +147,7 @@ Analiza conceptuală formală oferă o alternativă...
             \hline
             \end{tabular}
           \caption{Un conte$\times$t al animalelor vertebrate.}
+          \label{table:animale-vertebrate}
           \end{table}
       \end{example}
 
@@ -154,14 +162,41 @@ Analiza conceptuală formală oferă o alternativă...
       Un \textbf{concept} al contextului $(G, M, I)$ este definit de $A \subseteq G$, $B \subseteq M$, unde $A' = B$ și $B' = A$.
     \end{defn}
 
-    În engleză, mulțimea $A$ (a tuturor obiecte descrise de atributele conceptului) este numită \textbf{extent}, iar $B$ (atributele care descriu toate obiectele conceptului) \textbf{intent}.
+    În engleză, mulțimea $A$ (a tuturor obiecte descrise de atributele conceptului) este numită \textbf{extent} (extindere), iar $B$ (atributele care descriu toate obiectele conceptului) \textbf{intent}(obiectiv).
 
-    Având în vedere că $ A': G \rightarrow M$ și $B' : M \rightarrow G$, cei doi operatori pot fi combinați pentru a crea $A''$ și $G''$, care au ca domeniu mulțimea submulțimilor $G$ și $M$ respectiv.
 
+Fie $(G, M, I)$ un context, și $A, A_1, A_2$ submulțimi ale lui $G$, iar $B, B_1, B_2$ submulțimi de-ale lui $M$. Conform \cite{Ganter:1997:FCA:550737}, atunci:
+
+    \begin{enumerate}
+        \item $A_1 \subseteq A_2 \Rightarrow A^{'}_{1} \supseteq A^{'}_2$
+        \item $A  \subseteq A'''$
+        \item $A' = A'''$
+        \item $A \subseteq B' \Longleftrightarrow B \subseteq A' \Longleftrightarrow A \times B \subseteq I$
+    \end{enumerate}
+
+    Proprietăți echivalente se observă imediat și pentru $B, B_1, B_2$.
+
+    Având în vedere că $ ': \mathcal P \left(G \right) \rightarrow \mathcal P \left(M\right)$ și $B' : M \rightarrow G$, cei doi operatori pot fi combinați pentru a crea $A''$ și $G''$, care au ca domeniu mulțimea submulțimilor $G$ și $M$ respectiv. 
+
+Se observă pornind de la proprietățile enumerate mai sus că cele două funcții de derivare descriu o conexiune Galois între mulțimile submulțimilor pentru obiecte ($\mathcal P \left(G \right)$) și ($\mathcal P \left( M \right) $)
+
+În exemplul de mai sus, $\{2, 4\}'' = \{2, 4, 5\}$, $\{d, h\}'' = \{d, e, h \}$.
+
+
+  Câteva proprietăți de remarcat ale conceptelor, așa cum sunt definite:
+  \begin{itemize}
+        \item Nu orice submulțime de obiecte definește extinderea unui concept. Din cele descrise mai sus, rezultă că e necesar ca $ A = A''$ pentru $A$ să fie extinderea unui concept.
+
+        Ca exemplu, în tabelul \ref{table:animale-vertebrate}, $\{6\}$ nu definește un concept, deoarece $\{6\}'' = \{4, 6, 7\}$, adică toate atributele care descriu rechinul în contextul nostru descriu deasemenea și peștele lanternă, și peștele papagal.
+        \item Intersecția oricâtor extinderi (obiective) de concepte rezultă întotdeauna o altă extindere (obiectiv).
+        \item Reuniunea lor, pe de altă parte, rareori rezultă o altă extindere.
+        \item Mulțimea conceptelor unui context este o mulțime ordonată, dacă definim o relație de ordine în felul următor:
+          \begin{defn}
+            Fie $(A_1, B_1)$ și $(A_2, B_2)$ concepte ale contextului $K = (G, M, I)$. Spunem că $(A_2, B_2)$ este un \textbf{subconcept} al lui $(A_1, B_1)$ (notat $(A_2, B_2) \le (A_1, B_1)$ dacă $A_2 \subseteq A_1$. Astfel, $(A_1, B_1)$ este \textbf{supraconceptul} lui $(A_2, B_2)$
+          \end{defn}
+  \end{itemize}
     \begin{itemize}
       \item Diagrame Hasse
-      \item Conexiune Galois
-      \item Latice conceptuală
       \item Algoritmi folosiți la generarea și afișarea laticelor.
     \end{itemize}
 
@@ -202,5 +237,4 @@ Analiza conceptuală formală oferă o alternativă...
 \bibliographystyle{alpha}
 \bibliography{referinte}
 \appendix
-\chapter {Sup}
 \end{document}
