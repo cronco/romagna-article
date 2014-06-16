@@ -51,20 +51,17 @@
   Sp  = Spânul 
   
 }
-\preface{
+\afterpreface 
+
+\chapter*{Introducere}
+  Big-data și machine learning sunt domenii foarte căutate în zilele noastre, devenind chiar “buzzwords”. Majoritatea se bazează pe algoritmi simplii, de adunare și prelucrare automată a datelor.
+  Analiza conceptuală formală oferă o alternativă...
   
-
-
-Big-data și machine learning sunt domenii foarte căutate în zilele noastre, devenind chiar “buzzwords”. Majoritatea se bazează pe algoritmi simplii, de adunare și prelucrare automată a datelor.
-Analiza conceptuală formală oferă o alternativă...
-
 \begin{itemize}
   \item Importanța explorării conceptelor
   \item Lacunele softului existent
   \item Intențiile aplicației
 \end{itemize}
-}
-\afterpreface 
 
 
 \chapter{Analiza conceptuală formală}
@@ -305,22 +302,36 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
     \end{figure}
 
   \section{Software conex}
+  %TODO: define Duquenne-Guiges
+  %TODO: schimbă traducerile trimise de prof
 
     În această secțiune vom prezenta câteva alte programe remarcabile în domeniul FCA, sau care au avut un impact indirect asupra dezvoltării Romagna:
     \begin{description}
       \item[FCAStone] dezvoltat de Uta Priss, e un program care urmărește obținerea inter-operabilității între diferite programe pentru FCA (numele vine de la Piatra \textit{[n.t. Stone = Piatră]} Rosetta) și convertește contexte în latice de concepte, și latice de concepte în formate grafice.
-      \item[Conexp]
+      \item[Conexp] dezvoltat de Serhiy A. Yevtushenko, este o unealtă scrisă în Java, folosită în principal în scopuri educaționale (dar nu numai), are numeroase funcționalități de modelare a contextelor, dintre care amintim:
+        \begin{itemize}
+            \item calculează numărul de concepte formale dintr-un context dat
+            \item calculează laticea de concepte
+            \item permite explorarea atributelor
+            \item calculează mulțimea de implicații Duquenne-Guiges
+            \item calculează regulile de asociații
+        \end{itemize}
       \item[\LaTeX for FCA] \cite{LatexForFCA:homepage} Plugin pentru \LaTeX, scris de Bernhard Ganter, oferă câteva ``environment''-uri noi, folosite și în această lucrare, care permite aranjarea ușoară în pagina a contextelor și a laticilor derivate din acestea.
-      \item[FCAStone]
     \end{description}
 
 \chapter{Romagna}
+
+  Romagna este o aplicație dezvoltată începând cu anul 2014, pornită la Universitatea Babeș-Bolyai ca o alternativă folosindu-se de tehnologiile web pentru un navigator de concepte modern.
+
+
   \section{Raționament}
   \label{sec:rationament}
 
     \subsection{Ușurință de utilizare}
 
     \subsection{Avantajele distribuirii aplicațiilor web}
+
+    \subsection{Folosirea web-ului, păstrarea confidențialității datelor}
   \section{Structură}
   \section{Tehnologii}
     \subsection{CoffeeScript}
@@ -341,6 +352,9 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
 
       % subsubsection MySQL versus sql.js (end)
       \subsubsection{SVG IS FUCKED}
+
+    \subsection{Viitor}
+  \chapter{Concluzii}
 
 \bibliographystyle{alpha}
 \bibliography{romagna}

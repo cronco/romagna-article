@@ -380,7 +380,7 @@
 %    ******* conditional defaults ******* 
 \draftfalse
 \afterprefacefalse
-\pagestyletoprighttrue
+%\pagestyletoprighttrue
 \abstractfalse
 \prefacefalse
 \dedicationfalse
@@ -535,15 +535,15 @@ Absolvent: {\@author}
 \let\enddescriptionlist=\endlist
 
 \newcommand\beforepreface{%
-        \pagenumbering{roman}
+        %\pagenumbering{roman}
         \pagestyle{empty}
         \titlep
         % \inscrierep
         \declaratiep
         \tableofcontents
         %\ifcopyright\copyrightp\fi  
-        \c@page2 % set page counter so that next is 2
-        \pagestyle{plain}
+        %\c@page2 % set page counter so that next is 2
+        %\pagestyle{plain}
         \ifabstract{%
                 \typeout{Abstract}
                 \addcontentsline{toc}{unnumberedsection}{Abstract}
@@ -613,8 +613,8 @@ Absolvent: {\@author}
         \fi
         \newpage
         \afterprefacetrue
-        \c@page0 % set page counter so that next is 1
-        \pagenumbering{arabic}
+        %\c@page0 % set page counter so that next is 1
+        %\pagenumbering{arabic}
         \pagestyle{plain}
         }
 \newenvironment{vita}%
