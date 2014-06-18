@@ -57,17 +57,18 @@
 \afterpreface 
 
 \chapter*{Introducere}
-  Big-data și machine learning sunt domenii foarte căutate în zilele noastre, devenind chiar “buzzwords”. 
-  
-  Majoritatea se bazează pe algoritmi simplii, de adunare și prelucrare automată a datelor.
 
-  \textit{Analiza conceptuală formală} oferă o alternativă, în care adunarea datelor este automată dar prelucrarea și interpretarea datelor este realizată de om, bazându-se pe câteva principii matematice bine definite și ușor de înțeles. 
+  Big-data a devenit un domeniu foarte căutat în zilele noastre, devenit un cuvânt repetat de toată lumea, de la programatori la oameni de marketing. 
+  Acest lucru se-ntâmplă deoarece lumea se \textit{înneacă} în date, adunate din diferite surse. Site-urile înregistrează fiecare mișcare a utilizatorilor, există pedometre care încarcă pe Internet numărul de pași făcut de utilizator în fiecare oră, datele de analiză medicală întorc tot mai multe date. 
+  Interpretarea lor devine din ce în ce mai grea, și tendința este de a se folosi metode de \textit{machine learning}, ceea ce presupune învățarea automată (câteodată semi-automată) a calculatoarelor prin prelucrarea repetată a unei cantități imense de date.
+  
+  \textbf{Analiza conceptuală formală} oferă o alternativă, în care adunarea datelor este automată dar prelucrarea și interpretarea datelor este realizată de om, bazându-se pe câteva principii matematice bine definite și (relativ) ușor de înțeles. 
 
   Acest câmp a început în anii 80 la Universitatea din Darmstadt, ca o evoluție a teoriei clasice a laticelor. Între timp, s-a dezvoltat într-un câmp care adună tot mai mulți cercetători și își dovedește utilitatea practică dincolo de câmpul din care s-a tras și dincolo de matematica abstractă.
 
-  Ce e mai spectaculos e că totul se bazează pe idei simple, elegante, generale, frumoase am putea spune, încât duc aproape de \textit{filozofia platonică} (un concept este alăturarea unei mulțimi de obiecte descrise de unele proprietăți și mulțimea acelor proprietăți).
+  Ce e mai spectaculos e că totul se bazează pe câteva idei simple, elegante, generale, frumoase am putea spune, încât duc aproape de \textit{filozofia platonică} (un concept este alăturarea unei mulțimi de obiecte descrise de unele proprietăți și mulțimea acelor proprietăți).
 
-  Unele din cele mai utilizate rezultate ale acestui domeniu sunt laticele de concept, diagrame care reprezintă ierarhiile conceptelor descrise mai sus. 
+  Unele din cele mai utilizate rezultate ale acestei metode de analiză sunt laticele de concept, diagrame care reprezintă ierarhiile conceptelor descrise mai sus. 
   
   \begin{figure}[h!]
 \begin{minipage}{.65\textwidth}
@@ -99,14 +100,16 @@
 
   Cu toate acestea, domeniul FCA duce lipsă de unelte frumoase (vom explica, în capitolele ce urmează ce înțelegem prin \textit{software frumos}), chiar dacă există tot mai multe programe care doresc să ajute cercetătorii în acest domeniu. Unele frustrează încă de la încercarea procesului de instalare, altele mistifică cercetătorul prin mesaje de eroare criptice, iar altele, poate, doar se mișcă prea încet, sau sunt prea greu de folosit.
 
-  În cele ce urmează dorim să descriem pe scurt domeniul Analizei conceptuale formale, starea soft-ului existent acum, și o nouă aplicație, care dorește să rezolve unele din problemele întâlnite de oamenii interesați în acest domeniu, și poate, să atragă prin software bine gândit (și bine realizat, căci un concept fără nici un obiect nu are cuprins - \textit{veți înțelege după ce veți parcurge primul capitol}) adepți noi.
+  În cele ce urmează dorim să descriem pe scurt domeniul analizei conceptuale formale (în capitolul \ref{chapter:1}), starea soft-ului existent acum (în capitolul \ref{chapter:2}), și o nouă aplicație (capitolul \ref{chapter:3}), care dorește să rezolve unele din problemele întâlnite de oamenii interesați în acest domeniu, și poate, să atragă prin software bine gândit (și, sperăm, \textit{bine realizat}, căci un concept fără nici un obiect nu are cuprins - \textit{veți înțelege după ce veți parcurge primul capitol}) adepți noi.
 
 \chapter{Analiza conceptuală formală}
+\label{chapter:1}
   \section{Introducere}
-    Analiza conceptuală formală este o metodă de sistematizare a datelor în \textbf{concepte}, definite la modul larg ca mulțimi de obiecte care împărtășesc anumite atribute sau proprietăți. Este o reinterpretare a teoriei clasică a laticelor, dezvoltată în principal în anii '30, axată către partea practică. Conceptul a fost introdus în lucrarea seminală a lui Robert Wille din 1982 \cite{wille:1982}, iar termenul a fost introdus în 1984 de același autor. În ultimele decenii, domeniul a atras multe contribuții și și-a dovedit utilitatea în domenii cum ar fi analiza și vizualizarea datelor, managementul informației.
+    Analiza conceptuală formală este o metodă de sistematizare a datelor în \textbf{concepte}, definite la modul larg ca tupluri constituite din mulțimi de obiecte care împărtășesc anumite atribute și mulțimea acelor atribute. Este o reinterpretare a teoriei clasică a laticelor, dezvoltată în principal în anii '30, axată către partea practică. Conceptul a fost introdus în lucrarea seminală a lui Robert Wille din 1982 \cite{wille:1982}, iar termenul a fost introdus în 1984 de același autor. În ultimele decenii, domeniul a atras multe contribuții și și-a dovedit utilitatea în domenii cum ar fi analiza și vizualizarea datelor, managementul informației.
   \section{Concepte matematice de bază}
-    Întrucât scopul lucrării este de a descrie aplicația practică, ne vom limita la a descrie conceptele de care avem nevoie pentru a înțelege domeniul.
+    Pentru a avea o mai bună înțelegere a conceptelor pe care se bazează aplicația, vom explica pe scurt definițiile de bază ale domeniului.
     \subsection{Mulțimi ordonate, latice, latice complete}
+    Vom începe cu câteva concepte elementare de algebră a mulțimilor, deoarece acest domeniu se bazează în întregime pe ele.
     \begin{defn}
       O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație $R$ care îndeplinește următoarele condiții:
       \begin{description}
@@ -130,15 +133,14 @@
     \end{defn}
 
     \begin{defn}
-      Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \textbf{limita inferioară} a mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \textbf{limita superioară} a mulțimii $s$ este definită prin $\forall a \in N, s \ge a$.
-      Putem nota mulțimea tuturor limitelor inferioare a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \textbf{infimumul} mulțimii $N$. Invers, cel mai mic element din mulțimea limitelor superioare este numit \textbf{supremumul} mulțimii $N$.
+      Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \textbf{minorantul} mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \textbf{majorantul} mulțimii $s$ este definit prin $\forall a \in N, s \ge a$.
+      Putem nota mulțimea tuturor minoranților a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \textbf{infimumul} mulțimii $N$. Invers, cel mai mic element din mulțimea majoranților este numit \textbf{supremumul} mulțimii $N$.
     \end{defn}
 
-    Minorantul se poate nota cu $\wedge N$ sau $\inf N$ (de la \textbf{infimum}), iar supremumul cu $\vee N$ sau $\sup N$.
+    Minorantul se poate nota cu $\wedge N$ sau $\inf N$, iar supremumul cu $\vee N$ sau $\sup N$.
 
     \begin{defn}
-      O mulțime ordonată $M$ este numită o \textbf{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente
-      ale mulțimii există supremum și infimum. O latice este \textbf{completă} dacă pentru orice submulțime a ei există supremum și infimum.
+      O mulțime ordonată $M$ este numită o \textbf{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente ale mulțimii există supremum și infimum. O latice este \textbf{completă} dacă pentru orice submulțime (finită) a ei există supremum și infimum.
     \end{defn}
 
     Orice latice completă are un element superior, numit \textbf{elementul unitate}, și un element inferior, numit \textbf{elementul zero}.
@@ -264,19 +266,21 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
 %\end{cxt}
 
 \chapter{Starea actuală}
+\label{chapter:2}
 
-  Există multe programe pentru diferite aspecte ale analizei conceptuale formale. O listă mai dezvoltată, care adună majoritatea programelor disponibile poate fi găsită la \cite{utapriss:software}.
+  În clipa de față există multe programe folosite pentru diferite aspecte ale analizei conceptuale formale. O listă mai dezvoltată, care adună majoritatea programelor disponibile poate fi găsită la \cite{utapriss:software}.
 
-  Mai jos vom discuta doar câteva programe care au influențat dezvoltarea Romagnei, sau sunt relevante din alte motive.
+  Mai jos vom discuta doar câteva programe care au influențat dezvoltarea Romagnei, sau sunt relevante din motive istorice, arhitecturale, etc.
   \section{Navigatoare de concepte}
     \subsection{Toscana}
-      Toscana\cite{Vogt:1995:Toscana} a fost lansat în 1995, și a fost unul din cele mai folosite unelte de explorare a laticelor de concepte pentru următorii ani.
+      Toscana\cite{Vogt:1995:Toscana} a fost lansat în 1995, și a fost unul din cele mai folosite unelte de explorare a laticelor de concepte pe parcursul următorilor ani.
 
-      Toscana este astăzi probabil cel mai bine ținută minte ca precursorul programului ToscanaJ, folosit și astăzi, prezentat mai jos.
+      Toscana este astăzi probabil cel mai bine ținută minte ca precursorul programului ToscanaJ, folosit și astăzi, prezentat în detaliu mai jos (\ref{subsec:toscanaj}).
 
       În ciuda eforturilor noastre, unealta nu a fost găsită pentru descărcare.
 
     \subsection{Toscanaj}
+    \label{subsec:toscanaj}
       ToscanaJ(\cite{Toscanaj:homepage}) este ``moștenitorul direct'' al lui Toscana, lucru evidențiat și de nume (J-ul vine de la Java).
 
       După cum spune chiar site-ul programului \cite{Toscanaj:toscanaj}: ``E o unealtă de vizualizare pentru scheme conceptuale foarte avansată, care reușește să afișeze informație interogată dintr-o bază de date în diagrame de latice, sau direct din structuri de date luate din memorie.''
@@ -364,6 +368,7 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
     \end{description}
 
 \chapter{Romagna}
+\label{chapter:3}
 
   Romagna este o aplicație dezvoltată începând cu anul 2014, pornită la Universitatea Babeș-Bolyai ca o alternativă folosindu-se de tehnologiile web pentru un navigator de concepte modern.
 
@@ -389,11 +394,11 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
       \item Aplicația trebuie să fie \textbf{disponibilă pe mai multe platforme}. Utilizatorii nu vor instala un alt sistem de operare pentru a testa o aplicație. 
         În schimb, majoritatea utilizatorilor au la dispoziție un navigator web modern, cum ar fi Mozilla Firefox, Google Chrome, etc. 
         Aceste medii de aplicații (pentru că navigatoarele web și mediul de execuție al limbajului JavaScript pus la dispoziție de acestea a devenit un mediu de aplicații) se actualizează automat, permițând utilizarea celor mai noi funcționalități unei majorități a utilizatorilor acestora.
-        \item Aplicația trebuie să ofere \textbf{date de ieșire utile} utilizatorului. Ne referim aici în special la mesajele de erori, care trebuie să fie inteligibile, să ofere cursuri de acțiune care să rezolve problema, într-un limbaj non-tehnic, pe cât posibil.
+        \item Aplicația trebuie să ofere \textbf{date de ieșire utile} utilizatorului. Ne referim aici bine-nțeles la rezultatele așteptate de utilizator, prezentate într-un mod clar, dar și la mesajele de erori, care trebuie să fie inteligibile, să ofere cursuri de acțiune care să rezolve problema întâmpinată, într-un limbaj non-tehnic, pe cât posibil.
           Erorile criptice, cum ar fi stack-trace-uri, sau excepții afișate pe ecran descurajează utilizatorul obișnuit.
-        \item Aplicația trebuie să aibă \textbf{o interfață plăcută}. E părerea autorului că, deși utilizabile, interfețele generate de aplicații Java oferă o experiență neplăcută, nu se integrează în stilul sistemului de operare. Aplicațiile web sunt mult mai ușor de estetizat, mai ales cu ajutorul unor framework-uri CSS, dintre care amintim Twitter Bootsrap sau Zurb Foundation.
+        \item Aplicația trebuie să aibă \textbf{o interfață plăcută}. E părerea autorului că, deși utilizabile, interfețele generate de aplicații Java în general oferă o experiență neplăcută, nu se integrează în stilul sistemului de operare. Aplicațiile web sunt mult mai ușor de estetizat, mai ales cu ajutorul unor framework-uri CSS, dintre care amintim Twitter Bootsrap sau Zurb Foundation.
           \item Ca o ultimă alternativă, aplicația trebuie să vină \textbf{însoțită de documentație}. Aceasta trebuie formulată într-un limbaj non-tehnic pentru utilizatori. 
-          \item Opțional, aplicația ar trebui să aibă \textbf{interfața localizată}. Nu toți utilizatorii de calculatoare sunt vorbitori de engleză. Folosirea pictogramelor pentru realizarea interfeței poate ajuta, dar inclusiv în cazul acela, diferențele culturale, sau conceptele prea complexe pe care dezvoltatorii încearcă să le transmită, pot descuraja utilizarea aplicației mai mult decât să ajute.
+          \item Opțional, aplicația ar trebui să aibă \textbf{interfața localizată}. Nu toți utilizatorii de calculatoare sunt vorbitori de engleză. Folosirea pictogramelor pentru realizarea interfeței poate ajuta, dar inclusiv în acest caz, diferențele culturale, sau conceptele prea complexe pe care dezvoltatorii încearcă să le transmită, pot descuraja utilizarea aplicației mai mult decât să ajute.
       \end{itemize}
 
       Romagna îndeplinește unele din condițiile de mai sus(ușor de instalat, ușor de găsit) prin natura aplicațiilor web, iar celelalte condiții constituie obiectul efortului autorului.
