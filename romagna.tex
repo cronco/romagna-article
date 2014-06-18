@@ -109,15 +109,15 @@
   \section{Concepte matematice de bază}
     Pentru a avea o mai bună înțelegere a conceptelor pe care se bazează aplicația, vom explica pe scurt definițiile de bază ale domeniului.
     \subsection{Mulțimi ordonate, latice, latice complete}
-    Vom începe cu câteva concepte elementare de algebră a mulțimilor, deoarece acest domeniu se bazează în întregime pe ele.
+    Vom începe cu câteva concepte elementare de algebră a mulțimilor, deoarece acest domeniu se bazează în întregime pe ele. Următoarele definiții sunt preluate din \cite{Ganter:1997:FCA:550737}, înafara cazului unde este menționat altfel.
     \begin{defn}
-      O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație $R$ care îndeplinește următoarele condiții:
+      O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație binară $R$ care îndeplinește următoarele condiții:
       \begin{description}
-        \item [Reflexivitate] $xRx$
-        \item [Antisimetrie] $xRy, x \neq y \Rightarrow yRx$ e fals
-        \item [Tranzitivitate] $xRy, yRz \Rightarrow xRz$
+        \item [Reflexivitate] $xRx, \forall x \in M$
+        \item [Antisimetrie] $xRy, x \neq y \Rightarrow yRx$ e fals, $\forall x, y \in M$
+        \item [Tranzitivitate] $xRy, yRz \Rightarrow xRz, \forall x, y, z \in M$
       \end{description}
-      $\forall x, y,z \in M$. Relația $R$ se numește o \textbf{relație de ordine}.
+      Relația $R$ se numește o \textbf{relație de ordine}, sau \textbf{relație de ordine parțială}.
     \end{defn}
 
     Cel mai simplu exemplu, intuitiv exemplu este mulțimea numerelor reale $ \mathbb{R}$, alături de relația $\le$. Notăm o mulțime ordonată cu relația $\le$ cu $(M, \le)$.
