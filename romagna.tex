@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{pbox}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{url}
 \usepackage{minted}
 \usepackage{fca}
@@ -84,7 +85,6 @@
 \Edge{2}{4}
 \Edge{3}{5}
 \Edge{4}{5}
-\Numbers
 \leftAttbox{3}{2}{2}{1.}
 \rightAttbox{2}{2}{2}{disqualified}
 \rightAttbox{4}{2}{2}{2.}
@@ -111,7 +111,7 @@
     \subsection{Mulțimi ordonate, latice, latice complete}
     Vom începe cu câteva concepte elementare de algebră a mulțimilor, deoarece acest domeniu se bazează în întregime pe ele. Următoarele definiții sunt preluate din \cite{Ganter:1997:FCA:550737}, înafara cazului unde este menționat altfel.
     \begin{defn}
-      O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație binară $R$ care îndeplinește următoarele condiții:
+      O mulțime $M$ este ordonată dacă se poate aplica asupra sa o relație binară $R$ care are următoarele proprietăți:
       \begin{description}
         \item [Reflexivitate] $xRx, \forall x \in M$
         \item [Antisimetrie] $xRy, x \neq y \Rightarrow yRx$ e fals, $\forall x, y \in M$
@@ -120,33 +120,128 @@
       Relația $R$ se numește o \textbf{relație de ordine}, sau \textbf{relație de ordine parțială}.
     \end{defn}
 
-    Cel mai simplu exemplu, intuitiv exemplu este mulțimea numerelor reale $ \mathbb{R}$, alături de relația $\le$. Notăm o mulțime ordonată cu relația $\le$ cu $(M, \le)$.
+    Cel mai simplu exemplu, intuitiv exemplu este mulțimea numerelor reale $ \mathbb{R}$, alături de relația $\le$. Notăm o mulțime ordonată cu relația $\le$ cu $(M, \le)$. Un alt exemplu, relevant domeniului, este mulțimea tuturor submulțimilor sau \textit{mulțimea părților} a unei mulțimi (notată cu $\mathcal{P}(M)$ pentru mulțimea $M$), și relația de incluziune ($\subseteq$).
 
     \begin{defn}
-      Un element $y$ al mulțimii $M$ este \textbf{vecinul superior} al lui $x$ dacă $x < y$ și nu există nici un $z$ astfel încât $x < z < y$. În mod invers, $x$ este \textbf{vecinul inferior} al lui $y$.
+      Un element $x$ al mulțimii $M$ este \textbf{acoperit} de $y$ dacă $x < y$ și nu există nici un $z$ astfel încât $x < z < y$. În mod invers, $x$ \textbf{acoperit} al lui $y$.
     \end{defn}
 
-    Putem nota relația de vecinătate astfel: $x \prec y, y \succ x$.
+    Putem nota relația de acoperire astfel: $x \prec y, y \succ x$.
 
     \begin{defn}
-      Două elemente ale unei mulțimi ordonate sunt \textbf{comparabile} dacă $x \le y$ sau $y \le x$ (adică relația $\le$ se aplică asupra lor). Altfel sunt \textbf{incomparabile}. Un \textbf{lanț} este o submulțime în care oricare două elemente sunt comparabile. Un \textbf{anti-lanț} este o submulțime în care oricare două elemente sunt incomparabile.
+      Două elemente ale unei mulțimi ordonate sunt \textbf{comparabile} (în raport cu $\le$) dacă $x \le y$ sau $y \le x$ (adică relația $\le$ se aplică asupra lor). Altfel sunt \textbf{incomparabile}. Un \textbf{lanț} este o submulțime în care oricare două elemente sunt comparabile. Un \textbf{antilanț} este o submulțime în care oricare două elemente sunt incomparabile.
     \end{defn}
+
+    \begin{defn}
+      \textbf{Diagramele Hasse} sunt o reprezentare grafică a unei mulțimi ordonate. Elementele mulțimii sunt desenate ca niște cercuri. Dacă $x, y \in M$ (mulțimea descrisă de diagramă) și $x \prec y$, se desenează o linie între cele două elemente, iar elementul acoperit este desenat sub cercul reprezentând elementul care îl acoperă.
+
+      Astfel, putem citi o diagramă Hasse în felul următor: $x < y$ dacă și numai dacă putem urmări o linie continuă de la cercul care reprezintă $x$ la cercul care reprezintă $y$.
+    \end{defn}
+
+    \begin{example}
+      Vom desena o diagramă Hasse reprezentând mulțimea de numere naturale $\{ 1,2,3,4,5,6,10,12,15,20,30,60 \}$, ordonate după divizibilitate.
+      \begin{figure}[h!]
+        \begin{minipage}{.65\textwidth}
+          \unitlength 1.3mm
+          \begin{diagram}{100}{46}
+            \Node{1}{20}{0}
+            \Node{2}{36}{12}
+            \Node{3}{20}{12}
+            \Node{4}{52}{24} 
+            \Node{5}{4}{12} 
+            \Node{6}{36}{24}
+            \Node{7}{22}{24} %10
+            \Node{8}{4}{24} % 15
+            \Node{9}{44}{45}
+            \Node{10}{52}{36} % 12
+            \Node{11}{40}{36} %20
+            \Node{12}{24}{36} %30
+            \rightAttbox{9}{3}{-2}{60}
+            \rightAttbox{1}{3}{-2}{1}
+            \rightAttbox{2}{3}{-2}{2}
+            \rightAttbox{3}{3}{-2}{3}
+            \rightAttbox{4}{3}{-2}{4}
+            \rightAttbox{5}{3}{-2}{5}
+            \rightAttbox{6}{3}{-2}{6}
+            \rightAttbox{7}{3}{-2}{10}
+            \rightAttbox{8}{3}{-2}{15}
+            \rightAttbox{10}{3}{-2}{12}
+            \rightAttbox{11}{3}{-2}{20}
+            \rightAttbox{12}{3}{-2}{30}
+            \Edge{1}{2}
+            \Edge{1}{3}
+            \Edge{1}{5}
+            \Edge{2}{4}
+            \Edge{2}{6}
+            \Edge{2}{7}
+            \Edge{3}{6}
+            \Edge{3}{8}
+            \Edge{4}{10}
+            \Edge{4}{11}
+            \Edge{5}{7}
+            \Edge{5}{8}
+            \Edge{6}{10}
+            \Edge{6}{12}
+            \Edge{7}{11}
+            \Edge{7}{12}
+            \Edge{8}{12}
+            \Edge{10}{9}
+            \Edge{11}{9}
+            \Edge{12}{9}
+          \end{diagram}
+        \end{minipage}
+      \caption{Diagramă Hasse a unei mulțimi de numere naturale, ordonate după divizibiltate.}
+      \end{figure}
+    \end{example}
 
     \begin{defn}
       Fie $(M, \le)$ o mulțime ordonată, și $N$ o submulțime a sa. Înțelegem prin \textbf{minorantul} mulțimii $N$ un element $i$ astfel încât $\forall a \in N, i \le a$. În mod invers, \textbf{majorantul} mulțimii $s$ este definit prin $\forall a \in N, s \ge a$.
       Putem nota mulțimea tuturor minoranților a grupului $N$ cu $I$. Elementul cel mai mare din această mulțime este numit \textbf{infimumul} mulțimii $N$. Invers, cel mai mic element din mulțimea majoranților este numit \textbf{supremumul} mulțimii $N$.
     \end{defn}
 
-    Minorantul se poate nota cu $\wedge N$ sau $\inf N$, iar supremumul cu $\vee N$ sau $\sup N$.
+    Infimumul se poate nota cu $\wedge N$ sau $\inf N$, iar supremumul cu $\vee N$ sau $\sup N$.
 
     \begin{defn}
       O mulțime ordonată $M$ este numită o \textbf{latice} dacă $\forall x,y \in M, \exists x \vee y, \exists x \wedge y$. În alte cuvinte, o mulțime ordonată este o latice dacă pentru orice 2 elemente ale mulțimii există supremum și infimum. O latice este \textbf{completă} dacă pentru orice submulțime (finită) a ei există supremum și infimum.
     \end{defn}
 
-    Orice latice completă are un element superior, numit \textbf{elementul unitate}, și un element inferior, numit \textbf{elementul zero}.
+    Orice latice completă are \textit{cel mai mare element}, numit \textbf{1}, și cel mai mic element, numit \textbf{0}.
+
 
     \begin{defn}
-      Conform \cite{Carpineto:2004:CDA:975252} O \textbf{conexiune Galois} este compusă din două mulțimi ordonate, $M, N$ și două funcții $\gamma, \psi$ astfel ca $ \gamma: M \rightarrow N, \psi : N \rightarrow M$, dacă și numai dacă:
+      Citând din \cite{Carpineto:2004:CDA:975252}, fie o mulțime $H$ și $\mathcal{K}$ o mulțime de submulțimi de-ale lui $G$. $I$ este un sistem de închideri peste $G$ dacă și numai dacă:
+      $$
+        \bigcap_{i \in I} A_i \in \mathcal{K} \text{pentru fiecare submulțime non-vidă} A_{i \in I} \subseteq \mathcal{K} \text{și} \mathcal{K} \in H
+      $$
+    \end{defn}
+
+    Astfel, $\mathcal{K}$ trebuie închisă la intersecție și să aibă un cel mai mare element. Dacă $\mathcal{K}$ e un sistem de închideri, atunci tuplul $(K, \subseteq)$ e o latice completă în care
+      $$
+      \bigwedge \{ A_i | i \in I \} = \cap_{i \in I} A_i, 
+      $$
+      $$
+      \bigvee \{ A_i | i \in I \} = \bigcap \{ B \in \mathcal{K} | \cup _{i \in I} A_i \in B \}
+    $$
+
+    \begin{defn}
+      Conform \cite{Carpineto:2004:CDA:975252}, un \textbf{operator de închideri} peste H e un morfism $\varphi : \mathcal{P}(H) \leftarrow \mathcal{P}(H)$ astfel încât, pentru toate $A, B \subseteq H$:
+      \begin{enumerate}
+        \item $A \subseteq \varphi(A)$
+        \item $A \subseteq B \Rightarrow \varphi(A) \subseteq \varphi(B)$
+        \item $\varphi(\varphi(A)) = \varphi(A)$
+      \end{enumerate}
+    \end{defn}
+
+    \cite{Carpineto:2004:CDA:975252} Mulțimea tuturor închiderilor al unui operator de închideri e un sistem de închideri și formează o latice completă, dacă relația de ordonare este relația de incluziune, în care:
+    $$
+    \bigwedge\{A_i | i \in I \} = \cap_{i \in I} A_i,
+    $$
+    $$
+    \bigvee \{A_i | i \in I \} = \varphi\left( \bigcup_{i \ in I} A_i \right)
+    $$
+
+    \begin{defn}
+      Conform \cite{Carpineto:2004:CDA:975252} O \textbf{conexiune Galois} este compusă dintr-un tuplu de două mulțimi ordonate, $M, N$ și două morfisme $\gamma, \psi$ astfel ca $ \gamma: M \rightarrow N, \psi : N \rightarrow M$, dacă și numai dacă:
     \begin{enumerate}
       \item $m_1 \le m_2 \Rightarrow  \gamma m_1 \ge \gamma m_2$
       \item $n_1 \le n_2 \Rightarrow \psi n_1 \ge \psi m_2$
@@ -155,27 +250,29 @@
     sau, echivalent, $m \le \psi n \Leftrightarrow n \le \gamma m$
     \end{defn}
 
+    În cazul unei conexiuni Galois între $\mathcal{P}(M)$ și $\mathcal{P}(N)$, morfismul $\psi\gamma$ e un operator de închidere peste $M$ și morfismul $\gamma\psi$ e un operator de închidere peste N.
+
     \subsection{Context, concept, ierarhie de concepte}
     \begin{defn}
-      În cadrul analizei conceptuale, un \textbf{context} $K = (G, M, I)$ este format din 2 mulțimi, $G$ și $M$, și o relație binară $I$ între acestea. Mulțimea $G$ reprezintă obiecte, iar $M$ atribute.
+      Fie un triplet $K = (G, M, I)$ format din 2 mulțimi, $G$ și $M$, și o relație binară $I$ între acestea. Acesta se numește \textbf{context}. Mulțimea $G$ este compusă din obiecte, iar $M$ din atribute.
     \end{defn}
 
-      Literele provin din limba germană, în care conceptele au fost descrise inițial, de la Gegenstände și MerKmale, respectiv. Relația $I$ e numită \textbf{relația de incidență}, iar $gIm$ poate fi citit ca ``obiectul $g$ este descris de atributul $m$'', sau ``atributul $m$ descrie obiectul $g$''.
+      Literele provin din limba germană, în care aceste concepte au fost descrise inițial, fiind inițialele cuvintelor Gegenstände și Merkmale, respectiv. Relația $I$ e numită \textbf{relația de incidență}, iar $gIm$ poate fi citit  ca ``obiectul $g$ are atributul $m$''.
 
       \begin{example}
-      Preluăm următorul exemplu din \cite{Carpineto:2004:CDA:975252}, un context (foarte redus)al animalelor vertebrate.
+      Preluăm următorul exemplu din \cite{Carpineto:2004:CDA:975252}, un context (foarte redus)al animalelor vertebrate. Atributele sunt reprezentate pe coloane, iar obiectele sunt rânduri. Un $\times$ într-o celulă înseamnă că există relația $gIm$, pentru atributul și obiectul respectiv.
         \begin{table}[h]
           \begin{tabular}[c]{| c | c | c | c | c | c | c | c | c | c | c |}
             \hline
             \multicolumn{2}{|c|}{} &
-            \parbox{1.2cm}{\centering respiră în apă\\(a)} &
-            \parbox{1.2cm}{\centering zboară \\(b)}         &
+            \parbox{1.2cm}{\centering  respiră în apă\\(a)} &
+            \parbox{1.2cm}{\centering  zboară \\(b)}         &
             \parbox{1.2cm}{\centering  are cioc\\(c)}       &
             \parbox{1.2cm}{\centering  are mâini \\(d)}      &
             \parbox{1.2cm}{\centering  are schelet \\(e)}     &
-            \parbox{1.2cm}{\centering are aripi \\(f)}       &
+            \parbox{1.2cm}{\centering  are aripi \\(f)}       &
             \parbox{1.2cm}{\centering  trăiește în apă\\(g)}  &
-            \parbox{1.2cm}{\centering naște pui vii \\ (h)}  &
+            \parbox{1.2cm}{\centering  naște pui vii \\ (h)}  &
             \parbox{1.2cm}{\centering  produce lumină \\(i)} \\ \hline
               1 & Liliac        &   & $\times$ &   &   & $\times$ & $\times$ &   & $\times$ &     \\
               2 & Vultur        &   & $\times$ & $\times$ &   & $\times$ & $\times$ &   &   &     \\
@@ -199,10 +296,10 @@
     În cuvinte, $A'$ este mulțimea tuturor atributelor (din contextul la care ne raportăm) care descriu toate obiectele din $A$.
 
     \begin{defn}
-      Un \textbf{concept} al contextului $(G, M, I)$ este definit de $A \subseteq G$, $B \subseteq M$, unde $A' = B$ și $B' = A$.
+      Fie $A \subseteq G$, $B \subseteq M$, unde $A' = B$ și $B' = A$. Tuplul $(A, B)$ este un \textbf{concept} al contextului $(G, M, I)$.
     \end{defn}
 
-    În engleză, mulțimea $A$ (a tuturor obiecte descrise de atributele conceptului) este numită \textbf{extent} (cuprins), iar $B$ (atributele care descriu toate obiectele conceptului) \textbf{intent}(conținut).
+    În engleză, mulțimea $A$ (a tuturor obiecte descrise de atributele conceptului) este numită \textbf{extent} (în română \textit{cuprins}), iar $B$ (atributele care descriu toate obiectele conceptului) \textbf{intent}( în română \textit{conținut}).
 
 
 Fie $(G, M, I)$ un context, și $A, A_1, A_2$ submulțimi ale lui $G$, iar $B, B_1, B_2$ submulțimi de-ale lui $M$. Conform \cite{Ganter:1997:FCA:550737}, atunci:
