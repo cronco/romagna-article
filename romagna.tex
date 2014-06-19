@@ -10,6 +10,8 @@
 \usepackage{url}
 \usepackage{minted}
 \usepackage{fca}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 \graphicspath{ {images/} }
 \usepackage[
   bookmarksnumbered,
@@ -19,10 +21,22 @@
   linktocpage
   ]{hyperref}
 
-\singlespacing
+%\singlespacing
 \newtheorem{defn}{Definiție}
 \newtheorem{example}{Exemplu}
 \newtheorem{theorem}{Teoremă}
+\linespread{1.15}
+
+\floatname{algorithm}{Algoritm}
+\renewcommand{\algorithmicrequire}{\textbf{Date de intrare:}}
+\renewcommand{\algorithmicensure}{\textbf{Date de ieșire:}}
+\algrenewcommand{\algorithmicfunction}{\textbf{funcție}}
+\algrenewcommand{\algorithmicreturn}{\textbf{întoarce}}
+\algrenewcommand{\algorithmicwhile}{\textbf{cât timp}}
+\algrenewcommand{\algorithmicend}{\textbf{sfârșit}}
+\algrenewcommand{\algorithmicdo}{\textbf{execută}}
+\algrenewcommand{\algorithmicfor}{\textbf{pentru}}
+\algrenewcommand{\algorithmicif}{\textbf{dacă}}
 
 \begin{document}
 
@@ -133,26 +147,24 @@
     \end{defn}
 
     \begin{defn}
+      \label{defn:hasse}
       \textbf{Diagramele Hasse} sunt o reprezentare grafică a unei mulțimi ordonate. Elementele mulțimii sunt desenate ca niște cercuri. Dacă $x, y \in M$ (mulțimea descrisă de diagramă) și $x \prec y$, se desenează o linie între cele două elemente, iar elementul acoperit este desenat sub cercul reprezentând elementul care îl acoperă.
 
       Astfel, putem citi o diagramă Hasse în felul următor: $x < y$ dacă și numai dacă putem urmări o linie continuă de la cercul care reprezintă $x$ la cercul care reprezintă $y$.
     \end{defn}
 
     \begin{example}
-      Vom desena o diagramă Hasse reprezentând mulțimea de numere naturale $\{ 1,2,3,4,5,6,10,12,15,20,30,60 \}$, ordonate după divizibilitate.
+      Vom desena o diagramă Hasse reprezentând mulțimea de numere naturale\\ $\{ 1,2,3,4,5,6,10,12,15,20,30,60 \}$, ordonate după divizibilitate.
       \begin{figure}[h!]
+        \centering
         \begin{minipage}{.65\textwidth}
           \unitlength 1.3mm
-          \begin{diagram}{100}{46}
-            \Node{1}{20}{0}
-            \Node{2}{36}{12}
-            \Node{3}{20}{12}
-            \Node{4}{52}{24} 
-            \Node{5}{4}{12} 
-            \Node{6}{36}{24}
+          \begin{diagram}{100}{48}
+            \Node{1}{20}{0} \Node{2}{36}{12} \Node{3}{20}{12}
+            \Node{4}{52}{24} \Node{5}{4}{12} \Node{6}{36}{24}
             \Node{7}{22}{24} %10
             \Node{8}{4}{24} % 15
-            \Node{9}{44}{45}
+            \Node{9}{40}{48}
             \Node{10}{52}{36} % 12
             \Node{11}{40}{36} %20
             \Node{12}{24}{36} %30
@@ -315,54 +327,225 @@ Fie $(G, M, I)$ un context, și $A, A_1, A_2$ submulțimi ale lui $G$, iar $B, B
 
     Având în vedere că $ ': \mathcal P \left(G \right) \rightarrow \mathcal P \left(M\right)$ și $B' : M \rightarrow G$, cei doi operatori pot fi combinați pentru a crea $A''$ și $G''$, care au ca domeniu mulțimea submulțimilor $G$ și $M$ respectiv. 
 
-Se observă pornind de la proprietățile enumerate mai sus că cele două funcții de derivare descriu o conexiune Galois între mulțimile submulțimilor pentru obiecte ($\mathcal P \left(G \right)$) și ($\mathcal P \left( M \right) $)
+    Se observă pornind de la proprietățile enumerate mai sus că cele două funcții de derivare descriu o conexiune Galois între mulțimile submulțimilor pentru obiecte ($\mathcal P \left(G \right)$) și ($\mathcal P \left( M \right) $)
 
-În exemplul de mai sus, $\{2, 4\}'' = \{2, 4, 5\}$, $\{d, h\}'' = \{d, e, h \}$.
+    În exemplul de mai sus, $\{2, 4\}'' = \{2, 4, 5\}$, $\{d, h\}'' = \{d, e, h \}$.
 
 
-  Câteva proprietăți de remarcat ale conceptelor, așa cum sunt definite:
-  \begin{itemize}
-        \item Nu orice submulțime de obiecte definește cuprinsul unui concept. Din cele descrise mai sus, rezultă că e necesar ca $ A = A''$ pentru $A$ să fie cuprinsul unui concept.
-
-        Ca exemplu, în tabelul \ref{table:animale-vertebrate}, $\{6\}$ nu definește un concept, deoarece $\{6\}'' = \{4, 6, 7\}$, adică toate atributele care descriu rechinul în contextul nostru descriu de-asemenea și peștele lanternă, și peștele papagal.
-        \item Intersecția oricâtor cuprinsuri (sau conținuturi) de concepte are ca rezultat întotdeauna un alt cuprins (respectiv conținut).
-        \item În urma reuniunii lor, pe de altă parte, rareori rezultă un alt cuprins.
-        \item Mulțimea conceptelor unui context este o mulțime ordonată, dacă definim o relație de ordine în felul următor:
-          \begin{defn}
-            Fie $(A_1, B_1)$ și $(A_2, B_2)$ concepte ale contextului $K = (G, M, I)$. Spunem că $(A_2, B_2)$ este un \textbf{subconcept} al lui $(A_1, B_1)$ (notat $(A_2, B_2) \le (A_1, B_1)$ dacă $A_2 \subseteq A_1$. Astfel, $(A_1, B_1)$ este \textbf{supraconceptul} lui $(A_2, B_2)$
-          \end{defn}
-  \end{itemize}
-
-    \begin{theorem}
-      \textbf{Teorema de bază a laticelor de concepte} - 
-      Fie un context $(G, M, I)$, și o mulțime ordonată $\mathcal C \left(G, M, I; \le \right)$ se numește laticea de concepte a contextului, care are supremumul și infimumul descrise de:
-      $$ \bigwedge_{t \in T}(A_t, B_t) = \left( \bigcap_{t \in T} A_t, \left( \bigcup_{t \in T} B_t \right)'' \right)$$
-      $$ \bigvee_{t \in T} (A_t, B_t) = \left( \left( \bigcup_{t \in T} A_t \right)'', \bigcap_{ t \in T} B_t \right)$$
-    \end{theorem}
-
-  
-
+    Câteva proprietăți de remarcat ale conceptelor, așa cum sunt definite:
     \begin{itemize}
-      \item Diagrame Hasse
+      \item Nu orice submulțime de obiecte definește cuprinsul unui concept. Din cele descrise mai sus, rezultă că e necesar ca $ A = A''$ pentru $A$ să fie cuprinsul unui concept.
+
+      Ca exemplu, în tabelul \ref{table:animale-vertebrate}, $\{6\}$ nu definește un concept, deoarece $\{6\}'' = \{4, 6, 7\}$, adică toate atributele care descriu rechinul în contextul nostru descriu de-asemenea și peștele lanternă, și peștele papagal.
+      \item Intersecția oricâtor cuprinsuri (sau conținuturi) de concepte are ca rezultat întotdeauna un alt cuprins (respectiv conținut).
+      \item În urma reuniunii lor, pe de altă parte, rareori rezultă un alt cuprins.
+      \item Mulțimea conceptelor unui context este o mulțime ordonată, dacă definim o relație de ordine în felul următor:
+      \begin{defn}
+        Fie $(A_1, B_1)$ și $(A_2, B_2)$ concepte ale contextului $K = (G, M, I)$. Spunem că $(A_2, B_2)$ este un \textbf{subconcept} al lui $(A_1, B_1)$ (notat $(A_2, B_2) \le (A_1, B_1)$ dacă $A_2 \subseteq A_1$. Astfel, $(A_1, B_1)$ este \textbf{supraconceptul} lui $(A_2, B_2)$.
+        \end{defn}
+    \end{itemize}
+
+        \begin{theorem}
+            \textbf{Teorema de bază a laticelor de concepte} - 
+            Fie un context $(G, M, I)$, și o mulțime ordonată $\mathcal C \left(G, M, I; \le \right)$ se numește laticea de concepte a contextului, care are supremumul și infimumul descrise de:
+            $$ \bigwedge_{t \in T}(A_t, B_t) = \left( \bigcap_{t \in T} A_t, \left( \bigcup_{t \in T} B_t \right)'' \right)$$
+            $$ \bigvee_{t \in T} (A_t, B_t) = \left( \left( \bigcup_{t \in T} A_t \right)'', \bigcap_{ t \in T} B_t \right)$$
+        \end{theorem}
+
+
+    \begin{example}
+      Vom prezenta diagrama laticei de concepte derivate din tabelul \ref{table:animale-vertebrate}. Se observă că supremumul are cuprins non-nul, dar infimumul da (pentru că nu există nici un animal în tabel cu toate prorpietățile). \cite{Carpineto:2004:CDA:975252}
+      \begin{figure}[h!]
+        \centering
+        \begin{minipage}{.8\textwidth}
+          \unitlength 1.3mm
+          \begin{diagram}{100}{80}
+            \Node{1}{50}{80} \Node{2}{20}{60} \Node{3}{40}{60} \Node{4}{60}{60}
+            \Node{5}{80}{60} \Node{6}{10}{40} \Node{7}{30}{40} \Node{8}{50}{40}
+            \Node{9}{70}{40} \Node{10}{0}{20} \Node{11}{20}{20} \Node{12}{40}{20}
+            \Node{13}{60}{20} \Node{14}{80}{20} \Node{15}{100}{20} \Node{16}{50}{1}
+            \Edge{1}{2} \Edge{1}{3} \Edge{1}{4} \Edge{1}{5} \Edge{2}{6} \Edge{2}{7}
+            \Edge{3}{7} \Edge{3}{8} \Edge{4}{8} \Edge{4}{9} \Edge{5}{14} \Edge{6}{10}
+            \Edge{6}{11} \Edge{7}{11} \Edge{7}{12} \Edge{8}{12} \Edge{8}{13} \Edge{9}{13}
+            \Edge{9}{14} \Edge{5}{15} \Edge{16}{11} \Edge{16}{12} \Edge{16}{13} \Edge{16}{14}
+            \Edge{16}{10 }\Edge{16}{15} 
+
+            \centerAttbox{1}{0}{3}{are schelet} \leftAttbox{2}{-1}{3}{trăiește în apă}
+            \leftAttbox{3}{-1}{3}{are cioc} \leftAttbox{6}{-1}{3}{respiră sub apă}
+            \leftAttbox{15}{3}{3}{are mâini} \rightAttbox{4}{1}{3}{are aripi}
+            \rightAttbox{5}{0}{3}{naște pui vii} \rightAttbox{9}{1}{3}{poate \\zbura}
+            \rightAttbox{10}{2}{3}{produce\\ lumină} \leftObjbox{10}{0}{4}{pește lanternă}
+            \rightObjbox{11}{2}{4}{pește\\ papagal} \rightObjbox{12}{3}{4}{pinguin}
+            \rightObjbox{13}{1}{4}{vultur} \centerObjbox{14}{0}{4}{liliac}
+            \rightObjbox{15}{1}{4}{maimuță} \rightObjbox{6}{3}{4}{rechin}
+         \end{diagram}
+         \end{minipage}
+         \caption{Laticea de concepte corespunzătoare contextului descris în tabelul \ref{table:animale-vertebrate}.}
+      \end{figure}
+      Cum se citește diagrama? Gândindu-ne la definiția diagramelor Hasse (\ref{defn:hasse}), înseamnă că ne putem da seama dacă există o relație de ordine între două concepte (\textit{subconcept} vs. \textit{supraconcept}) dacă putem urmări o linie continuă între ele, cu supraconceptul afișat deasupra. Asta înseamnă că \textbf{toate} animalele descrise în context au atributul ``au schelet'' (deși asta era evident din descierea tabelului, fiind vorba de animale vertebrate). Alte deducții vizibile imediat e că nu toate animalele care au aripi pot zbura, și nu toate animalele care pot zbura sunt păsări.
+    \end{example}
+    Se poate observa că diagrama de mai sus nu are etichete descriptive pentru fiecare concept reprezentat.
+    Reprezentarea acelor informații pentru fiecare concept îngreunează diagrama și oferă multă informație redundantă, având în vedere că multe din concepte sunt subconceptele altor concepte. Totuși, cum hotărâm care etichete sunt afișate?
+
+
+
+    \begin{defn}
+      \textbf{Conceptul obiectului} $g \in G$ este conceptul $(g'', g')$, unde $g'$ este conținutul obiectului ($\{m \in M \ gIm\}$) $g$. Astfel, conținutul obiectului (notat cu $\gamma(g)$) este cel mai mic concept care-l are în cuprins pe $g$. Ca o paralelă, $(m'', m')$ este \textbf{conceptul atributului} pentru un atribut $m \in M$, $m'$ fiind cuprinsul atributului ($\{ g \in G|gIm\}$). Conceptul atributului, notat cu $\mu(m)$ este cel mai mare concept care-l are pe m în conținut.
+    \end{defn}
+
+    
+    Conform \cite{Ganter:1997:FCA:550737}, laticile de concepte a mai multor contexte pot să fie isomorfe. Există manipulări ale contextelor pe care le putem face fără a alterastructura laticei de concepte, cum ar fi comasarea obiectelor cu același conținut și a atributelor cu același cuprins. 
+
+    \begin{defn}
+      Fie un context $(G, M, I)$. Contextul este \textbf{clarificat} dacă $\forall g,h \in G, g' = h' \Rightarrow g = h$ și $m' = n' \Rightarrow m = n, \forall m,n \in M$.
+    \end{defn}
+
+    Laticea de concepte nu este influențată nici de prezența atributelor care pot fi scrise ca o combinație de alte atribute. Altfel spus, dacă $ m \in M$ e un atribut și $X \subseteq M$ e o mulțime de atribute, iar $m \notin X$, dar $m' = X'$, atunci conceptul atributului $\mu m$ e infimumul conceptelor atributelor $\mu x, x \in X$.
+
+    Altfel spus, putem omite atât atributele cât și obiectele reductibile, fără a influența laticea de concepte.
+  
+    Revenind la etichetare, în loc să repetăm pentru concept care cuprinde animalul \textit{rechin} această etichetă, putem să afișăm numele său doar pe conceptul obiectului. În loc de a îngreuna citirea diagramei, știind aceste concepte de bază diagrama devine mai lizibilă fără a fi încărcată.
+    \begin{itemize}
       \item Reducerea și clarificarea contextelor
       \item Rezolvarea contextelor cu valori multiple
     \end{itemize}
 
-  \section{Algoritmi relevați}
+    \subsection{Contexte cu valori multiple}
+
+      Contextele prezentate până acum, sunt foarte limitate prin prisma faptului că relația de incidență dintre obiect și atribut permite doar \textit{existența} sau \textit{lipsa} atributului pentru un anumit obiect.
+      Dar lumea și obiectele pe care dorim să le descriem rareori pot fi descrise doar prin prezența sau lipsa unei proprietăți. Dacă descriem flori, unul din atributele de care-am vrea să ținem cont când construim conceptul este culoarea. Acest atribut nu poate fi descris simplu prin dihotomia \textit{are/ nu are}.
+
+      Astfel, vedem nevoia de a introduce un nou concept, acela al \textbf{contextelor cu valori multiple}.
+
+      \begin{defn}
+        \cite{Carpineto:2004:CDA:975252} ``Fie un cvadruplu $(G, M, V, I)$, format din 3 mulțimi $G, M, V$, $G$, mulțimea obiectelor, $M$, mulțimea atributelor cu valori multiple și $V$, mulțimea valorilor atributelor și dintr-o relație ternară între $G, M$ și $V$ (adică $I \subseteq G \times M \times V $) astfel încât $(g, m, v) \in I \text{și} (g, m, w) \in I \Rightarrow v = w$''
+      \end{defn}
+
+
+      Putem citi $(g, m, v) \in I$ ca și ``atributul $m$ are valoarea $v$ pentru obiectul $g$''. Dar contextele cu valori multiple nu se pretează conceptualizării, cum am definit-o în secțiunea anterioară. 
+      
+      Pentru a putea crea concepte, contextele cu valor multiple se vor transforma în contexte simple, prin diferite metode, numite \textbf{scale}. Cea mai simplă este înlocuirea oricărui atribut cu valori multiple în tupluri formate din $M \times V$ (de exemplu pentru atributul \textit{culoare} cu valori potențiale {albastru, verde, roșu}, creem atributele \textit{culoare-albastru, culoare-verde, culoare-roșu}). Aceasta se numește o \textbf{scală nominală}.
+
+      Scalele nominale se potrivesc în cazul în care domeniul de valori al atributului pe care-l înlocuim este compus din valori care se exclud reciproc (cum e exemplul anterior, al culorilor petalelor unei flori - dacă nu luăm în considerare culorile ca fiind compuse din alte culori primare, valorile se exclud). Dar în cazul în care o valoare este subsumată de alta? Ca un exemplu, să luăm câteva valori posibile pentru atributul "luminescent": {\textit{luminos, foarte luminos, orbitor}}
+
+    Se observă că primele valori posibile sunt subsumate în cele din urmă. Astfel, un bec este \textit{luminos}, dar soarele este și \textit{luminos}, dar și \textit{orbitor}. Acesta este un exemplu de \textbf{scală ordinală}.
+
+  Scalele ordinale permit comparația într-un singur sens. În practică, de multe ori, vrem să aflăm domeniul în care se află o valoare, nu doar o margine inferioară sau superioară. Astfel, exemplul de mai sus poate fi reformulat cu valori cum ar fi \textit{{$\le 100lm$, $\ge 100lm$, $\le 500 lm$, $\ge 500 lm$, $\le 1000 lm$, $\ge 1000 lm$}}. Astfel, un bec care luminează cu 750 lumeni va avea atributele {$\ge 100 lm$, $\ge 500 lm$, $\le 1000 lm$}. Aceasta este o \textbf{scală intra-ordinală}.
+
+
+  \begin{example}
+  Pentru a demonstra scalarea, vom transforma un context cu valori multiple care se referă la becuri aflate în comerț într-un context cu valori simple, folosindu-ne de cele trei tipuri de scale descrise:
+    \begin{table}[h!]
+      \begin{tabular}[c]{| c | c | c | c |}\hline
+        & culoare & consum curent & luminescență \\ \hline 
+          incandescent standard & caldă & 100W & 1690lm \\ \hline
+          bazat pe LED-uri & neutră & 27W & 1600lm \\ \hline
+          bec fluorescent & rece & 26W & 1750lm \\ \hline
+          bec cu halogen & neutră & 43W & 870lm \\ \hline
+      \end{tabular}
+      \caption{Context cu valori multiple descriind becuri}
+      \label{table:becuri-multiple}
+    \end{table}
+  \begin{table}[h!]
+    \begin{tabular}[c]{| c | c | c | c | c | c | c | c | c | c}\hline
+      & \multicolumn{3}{|c|}{culoare} &
+        \multicolumn{3}{|c|}{consum curent (în W)} & 
+        \multicolumn{3}{|c|}{luminescență (în lumeni)} \\
+      & caldă & neutră & rece & $\ge 30$ & $\ge 70$ & $\ge 100$ &
+      $\ge 1000$ & $\ge 1200$ & 1400\\ \hline
+      incandescent\\
+      standard & $\times$ & & & $\times$ & $\times$ & $\times$ &
+      $\times$ & $\times$ & $\times$ \\ \hline
+      bazat pe\\
+      LED-uri & & $\times$ & & & & & $\times$&&
+    \end{tabular}
+    \caption{Același context ca în tabelul \ref{table:becuri-multiple}, dar transformat în context cu valori simple}
+  \end{table}
+  \end{example}
+  %TODO COMPLETAT TABELU CĂ ACUMA-I GOL
+
+  \section{Algoritmi relevanți}
+
+    În secțiunea ce urmează vom prezenta câțiva algoritmi folositori pentru a prelucra contextele și laticile de concepte aferente acestora pentru a putea fi afișate.
+
+    Algoritmii descriși se împart în două categorii
+    \begin{itemize}
+      \item algoritmi de construcție a laticei de concepte a unui context
+      \item algoritmi de afișare eficientă a laticei de concepte
+    \end{itemize}
+
+    
+    \subsection{Algoritmi pentru construirea laticei de concepte}
+
+    Un algoritm simplu de înțeles pentru construirea laticei de concepte a unui context este cunoscut sub numele de \textit{Next Neighbors} - \textbf{Vecinii următori}. Numele explică ideea de bază a algoritmului: generarea iterativă a vecinilor (elementelor \textit{acoperite}), începând dintr-un concept, în relație cu $\prec$.
+
+    Conform \cite{Carpineto:2004:CDA:975252}, algoritmul este analog unei parcurgeri în lățime a laticei finale. O variantă bazată pe parcurgea în adâncime e de asemenea posibilă.
+
+      Începând cu elementul din vârful laticii $(G, G')$, algoritmul construiește un nivel odată, unde următorul nivel conține conceptele acoperite de toate conceptele prezente în nivelul curent. Mai exact, pentru fiecare concept din nivelul curent o funcție \textit{GasesteElementeleAcoperite} (descrisă mai jos \ref{figure:next-neighbors-algorithm}) e apelată care calculează conceptele acoperite de acel concept; funcția se bazează pe observația că toate conceptele acoperite de un concept se află într-o submulțime redusă de concepte - fiecare se obține prin a adăuga un atribut nou conținutului ($Y_1 = Y \cup \{m\}$) și a calcula $(Y_{1}^{'}, Y_{1}^{''})$  apoi se verifică dacă fiecare concept acoperit rezultat nu a mai fost generat anterior, caz în care conceptul este adăugat laticei și în final conceptul e legat de părintele său (e adăugată muchia).
+
+    Laticea rezultată este strucutrată ca un tuplu de două mulțimi, $(C, E)$, $C$ fiind mulțimea conceptelor rezultate și $E$ mulțimea laturilor dintre acestea, iar laturile sunt reprezentate ca și perechi ordonate de concepte $(c_1, c_2), c_1, c_2 \in C, c_1 < c_2$.
+
+    \begin{figure}[h!]
+      \begin{algorithmic}[1]
+        \Require Context $(G, M, I)$
+        \Ensure Latice $(C, E)$
+
+        \Function{Vecinii Următori}{Context $(G, M, I)$}
+          \State $C := \{(G, G')\}$
+          \State $E := \varnothing$
+          \State $nivelulCurent := \{(G, G')\}$
+          \While{$nivelulCurent  \ne \varnothing$}
+            \State $nivelulUrmator := \varnothing$
+            \For{$(X, Y) \in nivelulCurent$}
+              \State $elementeleAcoperite  := GasesteElementeleAcoperite(X, Y)$
+              \For{$(X_1, Y_1) \in elementeleAcoperite$}
+                \If{$(X_1, Y_1) \notin C$}
+                  \State $C := C \cup \{(X_1, Y_1)\}$
+                  \State $nivelulUrmator := nivelulUrmator \cup \{ (X_1, Y_1) \}$
+                \EndIf
+                \State $E := E \cup (X, Y) \rightarrow (X_1, Y_1)$
+              \EndFor
+            \EndFor
+            \State $nivelulCurent := nivelulUrmator$
+          \EndWhile
+          \State \Return $L = (C, E)$
+        \EndFunction
+        
+        \Function{$GasesteElementeleAcoperite$}{$(X, Y)$}
+          \State $candidati := \varnothing$
+          \For{$m \in M \backslash Y$}
+            \State $X_1 := (Y \cup \{m\})'$
+            \State $Y_1 = X_{1}^{'}$
+            \If{$X_1, Y_1 \notin candidati$}
+            \State $candidati := candidati \cup \{(X_1, Y_1)\}$
+            \EndIf
+          \EndFor
+          \State \Return $candidati$
+        \EndFunction
+      \end{algorithmic}
+      \caption{Algoritmul Vecinii următori, Sursa \cite{Carpineto:2004:CDA:975252}}
+      \label{figure:next-neighbors-algorithm}
+    \end{figure}
+
+    Avantajul acestui algoritm față de alții care au același scop (de a determina laticea de concepte a unui context) este că generează atât mulțimea conceptelor a unui context  dar și diagrama (\textit{conexiunile}) acestuia.
+
+    Complexitatea algoritmului este de $O(C \times G \times M^2)$. Deși există algoritmi cu o complexitate mai mică (neglijabil, conform \cite{Carpineto:2004:CDA:975252}), algoritmul prezentat a fost ales deoarece este ușor de urmărit și prezintă conceptele descrise în prima secțiune.
+
+    \subsection{Algoritmi pentru vizualizarea laticei de concepte}
+
+      De-a lungul acestei lucrări, vorbim foarte mult despre diagramele laticelor de concepte și despre importanța \textit{explorării} acestora, dar până acuma nu am menționat cum sunt generate aceste diagrame. 
+      Acesta este un domeniu dificil, întrucât un algoritm de generare trebuie să fie, în cele din urmă optimizat pentru lizibilitatea diagramei pentru oameni. Dispunerea nodurilor în așa fel încât să existe cât mai puține intersecții (acestea scad lizibilitatea diagramei drastic), păstrarea unei diagramei între anumite dimensiuni care să permită înțelegerea spațiului de căutare sunt doar câteva dintre provocările pe care le prezintă acest domeniu.
+      Viteza de generare a diagramei este un alt criteriu important, mai ales când avem de-a face cu contexte complexe.
+
+      Dincolo de orice încercări de a reduce dimensiunile diagramelor, în cazul datelor reale, cu sute, sau chiar mii de concepte și atribute, majoritatea diagramelor laticelor de concepte se află în această situație. Acest lucru relevă nevoia pentru navigatoare dinamice a contextelor. Acestea trebuie să poată ascunde sau afișa doar părți dintr-o diagramă, în funcție de cerințele utilizatorului și a manipulărilor pe care acesta le realizează asupra conceptelor, relațiilor dintre ele, etc.
+
+
 
   \section{Utilizări practice}
   \label{sec:utilizari-practice}
-%\begin{cxt}
-%\cxtName{Formula 1}
-%\att{1.}
-%\att{2.}
-%\atr{disqualified}
-%\obj{x..}{Hamilton}
-%\obj{.x.}{Alonso}
-%\obj{.xx}{Massa}
-%\end{cxt}
 
-\chapter{Starea actuală}
+
+\chapter{Starea software-ului existent în domeniu}
 \label{chapter:2}
 
   În clipa de față există multe programe folosite pentru diferite aspecte ale analizei conceptuale formale. O listă mai dezvoltată, care adună majoritatea programelor disponibile poate fi găsită la \cite{utapriss:software}.
@@ -370,7 +553,7 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
   Mai jos vom discuta doar câteva programe care au influențat dezvoltarea Romagnei, sau sunt relevante din motive istorice, arhitecturale, etc.
   \section{Navigatoare de concepte}
     \subsection{Toscana}
-      Toscana\cite{Vogt:1995:Toscana} a fost lansat în 1995, și a fost unul din cele mai folosite unelte de explorare a laticelor de concepte pe parcursul următorilor ani.
+      Toscana\cite{Vogt:1995:Toscana} a fost lansat în 1995, și a fost unul din cele mai folosite unelte de explorare a laticelor de concepte pe parcursul următorilor ani. Aplicația a fost scrisă în C și folosea un format de date proprietar, bazat pe text.
 
       Toscana este astăzi probabil cel mai bine ținută minte ca precursorul programului ToscanaJ, folosit și astăzi, prezentat în detaliu mai jos (\ref{subsec:toscanaj}).
 
@@ -444,9 +627,9 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
       \label{screenshot:galoisexplorer}
     \end{figure}
 
+    \subsection{Galitia}
+    \ldots %TODO
   \section{Software conex}
-  %TODO: define Duquenne-Guiges
-  %TODO: schimbă traducerile trimise de prof
 
     În această secțiune vom prezenta câteva alte programe remarcabile în domeniul FCA, sau care au avut un impact indirect asupra dezvoltării Romagna:
     \begin{description}
@@ -456,7 +639,6 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
             \item calculează numărul de concepte formale dintr-un context dat
             \item calculează laticea de concepte
             \item permite explorarea atributelor
-            \item calculează mulțimea de implicații Duquenne-Guiges
             \item calculează regulile de asociații
         \end{itemize}
       \item[conexp-clj] O reimplementare scrisă de Daniel Borchmann în limbajul de programare Clojure a programului de mai sus. Programul pune accentul pe linia de comandă și programarea interactivă în domeniul FCA.
@@ -583,7 +765,7 @@ Se observă pornind de la proprietățile enumerate mai sus că cele două func�
       \label{subsubsec:svg-problems}
 
   \section{Viitor}
-  \chapter{Concluzii}
+  \chapter*{Concluzii}
 
 \bibliographystyle{alpha}
 \bibliography{romagna}
